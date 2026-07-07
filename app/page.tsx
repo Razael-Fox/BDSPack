@@ -476,8 +476,9 @@ export default function Home() {
               { value: "resource", label: "Resource Packs (RP)" },
               { value: "manifest", label: "Manifest Generator" },
             ]}
-            value={activeTab}
-            onChange={setActiveTab}
+            onChange={(val) =>
+              setActiveTab(val as "behavior" | "resource" | "manifest")
+            }
           />
           <button
             onClick={resetSession}
