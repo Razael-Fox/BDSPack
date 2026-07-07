@@ -476,6 +476,7 @@ export default function Home() {
               { value: "resource", label: "Resource Packs (RP)" },
               { value: "manifest", label: "Manifest Generator" },
             ]}
+            value={activeTab}
             onChange={(val) =>
               setActiveTab(val as "behavior" | "resource" | "manifest")
             }
