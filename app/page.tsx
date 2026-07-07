@@ -356,7 +356,7 @@ export default function Home() {
   return (
     <div className="flex-1 flex flex-col max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
       {/* Header */}
-      <header className="flex items-center justify-between border-b border-border pb-4">
+      <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border pb-4">
         <div>
           <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight flex items-center space-x-2">
             <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent font-sans">BDSPack</span>
@@ -366,56 +366,52 @@ export default function Home() {
             Generate and manage Bedrock Dedicated Server addon configurations with ease.
           </p>
         </div>
-        <ThemeToggle />
+        <div className="flex items-center gap-3 self-end sm:self-center">
+          <ModeToggle mode={mode} onChange={setMode} />
+          <ThemeToggle />
+        </div>
       </header>
 
-      {/* Mode Selector and Setup */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <ModeToggle mode={mode} onChange={setMode} />
-        
-        {/* Quick info / Reset */}
-        <div className="flex items-center space-x-2 justify-end">
+      {/* Tab Navigation and Reset */}
+      <div className="border-b border-border flex items-center justify-between">
+        <div className="flex space-x-4">
           <button
-            onClick={resetSession}
-            className="flex items-center space-x-1 py-1.5 px-3 bg-muted hover:bg-black/5 dark:hover:bg-white/5 border border-border rounded-lg text-xs font-semibold cursor-pointer transition-colors"
+            onClick={() => setActiveTab('behavior')}
+            className={`pb-2 text-sm font-semibold border-b-2 transition-all cursor-pointer ${
+              activeTab === 'behavior'
+                ? 'border-primary text-primary font-bold'
+                : 'border-transparent text-foreground/60 hover:text-foreground'
+            }`}
           >
-            <RotateCcw className="w-3.5 h-3.5" />
-            <span>Reset Tab</span>
+            Behavior Packs
+          </button>
+          <button
+            onClick={() => setActiveTab('resource')}
+            className={`pb-2 text-sm font-semibold border-b-2 transition-all cursor-pointer ${
+              activeTab === 'resource'
+                ? 'border-secondary text-secondary font-bold'
+                : 'border-transparent text-foreground/60 hover:text-foreground'
+            }`}
+          >
+            Resource Packs
+          </button>
+          <button
+            onClick={() => setActiveTab('manifest')}
+            className={`pb-2 text-sm font-semibold border-b-2 transition-all cursor-pointer ${
+              activeTab === 'manifest'
+                ? 'border-primary text-primary font-bold'
+                : 'border-transparent text-foreground/60 hover:text-foreground'
+            }`}
+          >
+            Manifest Generator
           </button>
         </div>
-      </div>
-
-      {/* Tab Navigation */}
-      <div className="border-b border-border flex space-x-4">
         <button
-          onClick={() => setActiveTab('behavior')}
-          className={`pb-2 text-sm font-semibold border-b-2 transition-all cursor-pointer ${
-            activeTab === 'behavior'
-              ? 'border-primary text-primary font-bold'
-              : 'border-transparent text-foreground/60 hover:text-foreground'
-          }`}
+          onClick={resetSession}
+          className="pb-2 flex items-center space-x-1.5 text-xs text-foreground/60 hover:text-foreground font-semibold cursor-pointer transition-colors"
         >
-          Behavior Packs
-        </button>
-        <button
-          onClick={() => setActiveTab('resource')}
-          className={`pb-2 text-sm font-semibold border-b-2 transition-all cursor-pointer ${
-            activeTab === 'resource'
-              ? 'border-secondary text-secondary font-bold'
-              : 'border-transparent text-foreground/60 hover:text-foreground'
-          }`}
-        >
-          Resource Packs
-        </button>
-        <button
-          onClick={() => setActiveTab('manifest')}
-          className={`pb-2 text-sm font-semibold border-b-2 transition-all cursor-pointer ${
-            activeTab === 'manifest'
-              ? 'border-primary text-primary font-bold'
-              : 'border-transparent text-foreground/60 hover:text-foreground'
-          }`}
-        >
-          Manifest Generator
+          <RotateCcw className="w-3.5 h-3.5" />
+          <span>Reset Tab</span>
         </button>
       </div>
 
