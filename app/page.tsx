@@ -8,8 +8,6 @@ import {
   Upload,
   RotateCcw,
   FileJson,
-  BookOpen,
-  ChevronRight,
   Sparkles,
   Clipboard,
   Check,
@@ -927,58 +925,7 @@ export default function Home() {
       </div>
 
       {/* BDS Guide / Info Footer */}
-      <footer className="border-t border-border pt-6 pb-8 space-y-4 text-xs">
-        <div className="bg-muted/10 border border-border p-4 rounded-xl space-y-2.5">
-          <h4 className="font-bold flex items-center space-x-1.5 text-foreground/80">
-            <BookOpen className="w-4.5 h-4.5 text-primary" />
-            <span>Panduan Instalasi Addon Bedrock Dedicated Server (BDS)</span>
-          </h4>
-          <p className="text-foreground/60 leading-relaxed">
-            Minecraft Bedrock Dedicated Server menggunakan file JSON untuk
-            mengidentifikasi addon mana yang aktif di dunia game server Anda.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
-            <div className="bg-muted/40 p-2.5 rounded-lg border border-border space-y-1">
-              <div className="font-bold text-primary flex items-center space-x-1">
-                <span>1</span>
-                <ChevronRight className="w-3 h-3" />
-                <span>Upload Packs</span>
-              </div>
-              <p className="text-foreground/50 text-[10px]">
-                Copy folder behavior pack ke{" "}
-                <code className="font-mono">/behavior_packs</code> dan resource
-                pack ke <code className="font-mono">/resource_packs</code> di
-                root folder BDS Anda.
-              </p>
-            </div>
-            <div className="bg-muted/40 p-2.5 rounded-lg border border-border space-y-1">
-              <div className="font-bold text-primary flex items-center space-x-1">
-                <span>2</span>
-                <ChevronRight className="w-3 h-3" />
-                <span>Generate JSON</span>
-              </div>
-              <p className="text-foreground/50 text-[10px]">
-                Gunakan BDSPack untuk me-list dan mengurutkan UUID & Versi pack
-                Anda, lalu download file konfigurasinya.
-              </p>
-            </div>
-            <div className="bg-muted/40 p-2.5 rounded-lg border border-border space-y-1">
-              <div className="font-bold text-primary flex items-center space-x-1">
-                <span>3</span>
-                <ChevronRight className="w-3 h-3" />
-                <span>Copy ke World</span>
-              </div>
-              <p className="text-foreground/50 text-[10px]">
-                Letakkan file{" "}
-                <code className="font-mono">world_behavior_packs.json</code> dan{" "}
-                <code className="font-mono">world_resource_packs.json</code> di
-                dalam folder level dunia Anda (cth:{" "}
-                <code className="font-mono">/worlds/Bedrock level/</code>).
-              </p>
-            </div>
-          </div>
-        </div>
-
+      <footer className="border-t border-border pt-6 pb-8 text-xs">
         <div className="text-center text-foreground/40 text-[10px]">
           BDSPack &copy; 2026. Minecraft Bedrock Dedicated Server Pack
           Configuration Utility.
