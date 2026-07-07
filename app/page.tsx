@@ -411,31 +411,29 @@ export default function Home() {
       </header>
 
       {/* Main Mode Navigation (Dropdown) & Reset */}
-      <div className="border-b border-border flex items-center justify-between pb-3">
-        <div className="flex items-center space-x-2.5">
-          <label htmlFor="mode-select" className="text-xs font-bold uppercase text-foreground/50 tracking-wider">
-            Mode Kerja:
-          </label>
-          <div className="flex items-center space-x-1.5">
-            <select
-              id="mode-select"
-              value={activeTab}
-              onChange={(e) => setActiveTab(e.target.value as 'behavior' | 'resource' | 'manifest')}
-              className="bg-muted hover:bg-black/5 dark:hover:bg-white/5 border border-border rounded-xl px-3 py-2 text-xs font-bold cursor-pointer transition-colors outline-none focus:ring-1 focus:ring-primary/50 text-foreground"
-            >
-              <option value="behavior">Behavior Packs (BP)</option>
-              <option value="resource">Resource Packs (RP)</option>
-              <option value="manifest">Manifest Generator</option>
-            </select>
-            <button
-              onClick={resetSession}
-              className="p-2 bg-muted hover:bg-black/5 dark:hover:bg-white/5 border border-border rounded-xl text-foreground/75 hover:text-foreground cursor-pointer transition-colors flex items-center justify-center"
-              title="Reset Tab"
-              aria-label="Reset Tab"
-            >
-              <RotateCcw className="w-4 h-4" />
-            </button>
-          </div>
+      <div className="border-b border-border pb-3 flex flex-col space-y-2">
+        <label htmlFor="mode-select" className="text-xs font-bold uppercase text-foreground/50 tracking-wider">
+          Mode Kerja:
+        </label>
+        <div className="flex items-center w-full max-w-md gap-2">
+          <select
+            id="mode-select"
+            value={activeTab}
+            onChange={(e) => setActiveTab(e.target.value as 'behavior' | 'resource' | 'manifest')}
+            className="flex-1 bg-muted hover:bg-black/5 dark:hover:bg-white/5 border border-border rounded-xl px-3 py-2 text-xs font-bold cursor-pointer transition-colors outline-none focus:ring-1 focus:ring-primary/50 text-foreground"
+          >
+            <option value="behavior">Behavior Packs (BP)</option>
+            <option value="resource">Resource Packs (RP)</option>
+            <option value="manifest">Manifest Generator</option>
+          </select>
+          <button
+            onClick={resetSession}
+            className="p-2.5 bg-muted hover:bg-black/5 dark:hover:bg-white/5 border border-border rounded-xl text-foreground/75 hover:text-foreground cursor-pointer transition-colors flex items-center justify-center shrink-0"
+            title="Reset Tab"
+            aria-label="Reset Tab"
+          >
+            <RotateCcw className="w-4 h-4" />
+          </button>
         </div>
       </div>
 
