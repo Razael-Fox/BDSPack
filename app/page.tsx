@@ -312,7 +312,9 @@ export default function Home() {
 
       const loadedPacks: PackEntry[] = parsed.map((item: any) => ({
         pack_id: item.pack_id || '',
-        version: Array.isArray(item.version) ? [Number(item.version[0]) || 0, Number(item.version[1]) || 0, Number(item.version[2]) || 0] : [1, 0, 0],
+        version: (Array.isArray(item.version)
+          ? [Number(item.version[0]) || 0, Number(item.version[1]) || 0, Number(item.version[2]) || 0]
+          : [1, 0, 0]) as [number, number, number],
         name: item.name || `Existing Pack (${item.pack_id?.substring(0, 8)})`,
         isNew: false
       })).filter(p => p.pack_id);
