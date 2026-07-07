@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { Sparkles, Wrench, Settings, X, Eye, EyeOff } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { Sparkles, Wrench, Settings, X, Eye, EyeOff } from "lucide-react";
 
 interface AiPanelProps {
   currentJson: string;
@@ -11,16 +11,16 @@ interface AiPanelProps {
 }
 
 export default function AiPanel({ currentJson, onAiResponse }: AiPanelProps) {
-  const [prompt, setPrompt] = useState('');
+  const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState(false);
-  const [apiKey, setApiKey] = useState('');
+  const [apiKey, setApiKey] = useState("");
   const [showSettings, setShowSettings] = useState(false);
   const [showKey, setShowKey] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     // Load API Key from localStorage
-    const savedKey = localStorage.getItem('groq_api_key');
+    const savedKey = localStorage.getItem("groq_api_key");
     if (savedKey) {
       setApiKey(savedKey);
     }
@@ -28,43 +28,43 @@ export default function AiPanel({ currentJson, onAiResponse }: AiPanelProps) {
 
   const saveApiKey = (key: string) => {
     setApiKey(key);
-    localStorage.setItem('groq_api_key', key);
+    localStorage.setItem("groq_api_key", key);
   };
 
-  const handleAiAction = async (mode: 'fix' | 'generate') => {
+  const handleAiAction = async (mode: "fix" | "generate") => {
     setLoading(true);
     setError(null);
 
     try {
-      const response = await fetch('/api/ai', {
-        method: 'POST',
+      const response = await fetch("/api/ai", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          'x-groq-api-key': apiKey,
+          "Content-Type": "application/json",
+          "x-groq-api-key": apiKey,
         },
         body: JSON.stringify({
           mode,
-          prompt: mode === 'generate' ? prompt : undefined,
-          json: mode === 'fix' ? currentJson : undefined,
+          prompt: mode === "generate" ? prompt : undefined,
+          json: mode === "fix" ? currentJson : undefined,
         }),
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Terjadi kesalahan pada AI request.');
+        throw new Error(data.error || "Terjadi kesalahan pada AI request.");
       }
 
       if (data.result) {
         onAiResponse(data.result);
-        if (mode === 'generate') {
-          setPrompt('');
+        if (mode === "generate") {
+          setPrompt("");
         }
       } else {
-        throw new Error('AI tidak mengembalikan output JSON yang valid.');
+        throw new Error("AI tidak mengembalikan output JSON yang valid.");
       }
     } catch (err: any) {
-      setError(err.message || 'Gagal terhubung ke AI server.');
+      setError(err.message || "Gagal terhubung ke AI server.");
     } finally {
       setLoading(false);
     }
@@ -98,10 +98,12 @@ export default function AiPanel({ currentJson, onAiResponse }: AiPanelProps) {
             Groq API Settings
           </h4>
           <div className="space-y-1">
-            <label className="text-xs font-semibold">Groq API Key (Opsional)</label>
+            <label className="text-xs font-semibold">
+              Groq API Key (Opsional)
+            </label>
             <div className="relative flex items-center">
               <input
-                type={showKey ? 'text' : 'password'}
+                type={showKey ? "text" : "password"}
                 value={apiKey}
                 onChange={(e) => saveApiKey(e.target.value)}
                 placeholder="gsk_..."
@@ -112,11 +114,16 @@ export default function AiPanel({ currentJson, onAiResponse }: AiPanelProps) {
                 onClick={() => setShowKey(!showKey)}
                 className="absolute right-2.5 text-foreground/45 hover:text-foreground cursor-pointer"
               >
-                {showKey ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                {showKey ? (
+                  <EyeOff className="w-4 h-4" />
+                ) : (
+                  <Eye className="w-4 h-4" />
+                )}
               </button>
             </div>
             <p className="text-[10px] text-foreground/50 mt-1">
-              Disimpan di browser Anda (`localStorage`). Jika dikosongkan, API akan menggunakan server key (jika tersedia).
+              Disimpan di browser Anda (`localStorage`). Jika dikosongkan, API
+              akan menggunakan server key (jika tersedia).
             </p>
           </div>
         </div>
@@ -130,19 +137,19 @@ export default function AiPanel({ currentJson, onAiResponse }: AiPanelProps) {
           className="w-full h-24 bg-background border border-border rounded-lg p-3 text-xs outline-none focus:ring-1 focus:ring-secondary/50 resize-none font-sans"
           disabled={loading}
         />
-        
+
         <div className="flex space-x-2">
           <button
-            onClick={() => handleAiAction('generate')}
+            onClick={() => handleAiAction("generate")}
             disabled={loading || !prompt.trim()}
             className="flex-1 flex items-center justify-center space-x-1.5 py-2 px-3 bg-secondary text-black hover:bg-opacity-90 disabled:opacity-40 disabled:cursor-not-allowed rounded-lg text-xs font-bold transition-all shadow-md shadow-secondary/15 cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5" />
             <span>Generate JSON</span>
           </button>
-          
+
           <button
-            onClick={() => handleAiAction('fix')}
+            onClick={() => handleAiAction("fix")}
             disabled={loading || !currentJson.trim()}
             className="flex-1 flex items-center justify-center space-x-1.5 py-2 px-3 bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 disabled:opacity-40 disabled:cursor-not-allowed rounded-lg text-xs font-semibold border border-border transition-all cursor-pointer text-foreground"
           >
@@ -155,7 +162,9 @@ export default function AiPanel({ currentJson, onAiResponse }: AiPanelProps) {
       {loading && (
         <div className="flex items-center justify-center space-x-2 py-1">
           <div className="w-4 h-4 border-2 border-secondary border-t-transparent rounded-full animate-spin" />
-          <span className="text-xs text-foreground/60">AI sedang memproses...</span>
+          <span className="text-xs text-foreground/60">
+            AI sedang memproses...
+          </span>
         </div>
       )}
 

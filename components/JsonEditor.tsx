@@ -1,19 +1,19 @@
 /* eslint-disable react-hooks/set-state-in-effect */
-'use client';
+"use client";
 
-import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
-import { json } from '@codemirror/lang-json';
-import { useTheme } from 'next-themes';
+import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
+import { json } from "@codemirror/lang-json";
+import { useTheme } from "next-themes";
 
 // Dynamically import ReactCodeMirror to prevent SSR issues with document/window
-const ReactCodeMirror = dynamic(() => import('@uiw/react-codemirror'), { 
+const ReactCodeMirror = dynamic(() => import("@uiw/react-codemirror"), {
   ssr: false,
   loading: () => (
     <div className="w-full h-80 bg-muted animate-pulse rounded-xl border border-border flex items-center justify-center">
       <span className="text-foreground/50 text-sm">Loading Editor...</span>
     </div>
-  )
+  ),
 });
 
 interface JsonEditorProps {
@@ -45,11 +45,13 @@ export default function JsonEditor({
         <div className="flex items-center space-x-2">
           <span
             className={`inline-block w-2.5 h-2.5 rounded-full transition-all ${
-              isValid ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]' : 'bg-destructive shadow-[0_0_8px_rgba(239,68,68,0.5)]'
+              isValid
+                ? "bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]"
+                : "bg-destructive shadow-[0_0_8px_rgba(239,68,68,0.5)]"
             }`}
           />
           <span className="font-semibold">
-            {isValid ? '✓ Valid JSON' : '✗ Invalid JSON'}
+            {isValid ? "✓ Valid JSON" : "✗ Invalid JSON"}
           </span>
         </div>
         <div className="flex space-x-2">
@@ -80,7 +82,7 @@ export default function JsonEditor({
             height="100%"
             minHeight="320px"
             extensions={[json()]}
-            theme={resolvedTheme === 'dark' ? 'dark' : 'light'}
+            theme={resolvedTheme === "dark" ? "dark" : "light"}
             onChange={(val) => onChange(val)}
             className="h-full focus-within:ring-2 focus-within:ring-secondary/50 outline-none"
           />

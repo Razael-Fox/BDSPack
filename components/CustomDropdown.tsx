@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState, useRef, useEffect } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { useState, useRef, useEffect } from "react";
+import { ChevronDown } from "lucide-react";
 
 interface Option {
   value: string;
@@ -14,7 +14,11 @@ interface CustomDropdownProps {
   onChange: (value: string) => void;
 }
 
-export default function CustomDropdown({ options, value, onChange }: CustomDropdownProps) {
+export default function CustomDropdown({
+  options,
+  value,
+  onChange,
+}: CustomDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -23,13 +27,16 @@ export default function CustomDropdown({ options, value, onChange }: CustomDropd
   // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     }
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -42,8 +49,10 @@ export default function CustomDropdown({ options, value, onChange }: CustomDropd
         aria-haspopup="true"
         aria-expanded={isOpen}
       >
-        <span>{selectedOption ? selectedOption.label : 'Pilih mode...'}</span>
-        <ChevronDown className={`w-4 h-4 text-foreground/50 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+        <span>{selectedOption ? selectedOption.label : "Pilih mode..."}</span>
+        <ChevronDown
+          className={`w-4 h-4 text-foreground/50 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+        />
       </button>
 
       {isOpen && (
@@ -58,8 +67,8 @@ export default function CustomDropdown({ options, value, onChange }: CustomDropd
                 }}
                 className={`w-full text-left px-3 py-2 text-xs font-bold rounded-lg transition-colors cursor-pointer ${
                   option.value === value
-                    ? 'bg-primary/10 text-primary dark:bg-primary/20'
-                    : 'text-foreground/80 hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5'
+                    ? "bg-primary/10 text-primary dark:bg-primary/20"
+                    : "text-foreground/80 hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5"
                 }`}
                 role="menuitem"
               >

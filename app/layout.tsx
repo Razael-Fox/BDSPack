@@ -15,7 +15,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "BDSPack — Generate & Manage BDS Addons",
-  description: "Generate and edit world_behavior_packs.json and world_resource_packs.json for Minecraft Bedrock Dedicated Servers easily.",
+  description:
+    "Generate and edit world_behavior_packs.json and world_resource_packs.json for Minecraft Bedrock Dedicated Servers easily.",
 };
 
 export default function RootLayout({

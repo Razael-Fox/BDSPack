@@ -1,21 +1,21 @@
-import prettier from 'prettier/standalone';
-import parserBabel from 'prettier/plugins/babel';
-import parserEstree from 'prettier/plugins/estree';
+import prettier from "prettier/standalone";
+import parserBabel from "prettier/plugins/babel";
+import parserEstree from "prettier/plugins/estree";
 
 export async function formatJson(jsonStr: string): Promise<string> {
   try {
     // Strip whitespace to validate first
     const parsed = JSON.parse(jsonStr);
-    
+
     // Format using Prettier standalone
     const formatted = await prettier.format(JSON.stringify(parsed), {
-      parser: 'json',
+      parser: "json",
       plugins: [parserBabel, parserEstree],
       tabWidth: 2,
       semi: true,
       singleQuote: false,
     });
-    
+
     return formatted.trim();
   } catch {
     // If Prettier fails or JSON is invalid, return original or basic stringify format
