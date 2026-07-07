@@ -410,44 +410,27 @@ export default function Home() {
         <ThemeToggle />
       </header>
 
-      {/* Main Tab Navigation & Reset */}
-      <div className="border-b border-border flex items-center justify-between">
-        <div className="flex space-x-1 bg-muted p-1 rounded-lg border border-border text-xs">
-          <button
-            onClick={() => setActiveTab('behavior')}
-            className={`px-3 py-1.5 font-bold rounded-md transition-all cursor-pointer ${
-              activeTab === 'behavior'
-                ? 'bg-background shadow-sm text-primary'
-                : 'text-foreground/60 hover:text-foreground'
-            }`}
+      {/* Main Mode Navigation (Dropdown) & Reset */}
+      <div className="border-b border-border flex items-center justify-between pb-3">
+        <div className="flex items-center space-x-2.5">
+          <label htmlFor="mode-select" className="text-xs font-bold uppercase text-foreground/50 tracking-wider">
+            Mode Kerja:
+          </label>
+          <select
+            id="mode-select"
+            value={activeTab}
+            onChange={(e) => setActiveTab(e.target.value as 'behavior' | 'resource' | 'manifest')}
+            className="bg-muted hover:bg-black/5 dark:hover:bg-white/5 border border-border rounded-xl px-3 py-2 text-xs font-bold cursor-pointer transition-colors outline-none focus:ring-1 focus:ring-primary/50 text-foreground"
           >
-            Behavior Packs (BP)
-          </button>
-          <button
-            onClick={() => setActiveTab('resource')}
-            className={`px-3 py-1.5 font-bold rounded-md transition-all cursor-pointer ${
-              activeTab === 'resource'
-                ? 'bg-background shadow-sm text-secondary'
-                : 'text-foreground/60 hover:text-foreground'
-            }`}
-          >
-            Resource Packs (RP)
-          </button>
-          <button
-            onClick={() => setActiveTab('manifest')}
-            className={`px-3 py-1.5 font-bold rounded-md transition-all cursor-pointer ${
-              activeTab === 'manifest'
-                ? 'bg-background shadow-sm text-primary'
-                : 'text-foreground/60 hover:text-foreground'
-            }`}
-          >
-            Manifest Generator
-          </button>
+            <option value="behavior">Behavior Packs (BP)</option>
+            <option value="resource">Resource Packs (RP)</option>
+            <option value="manifest">Manifest Generator</option>
+          </select>
         </div>
         
         <button
           onClick={resetSession}
-          className="flex items-center space-x-1 py-1.5 px-2.5 bg-muted hover:bg-black/5 dark:hover:bg-white/5 border border-border rounded-lg text-xs font-semibold cursor-pointer transition-colors"
+          className="flex items-center space-x-1.5 py-2 px-3 bg-muted hover:bg-black/5 dark:hover:bg-white/5 border border-border rounded-xl text-xs font-semibold cursor-pointer transition-colors"
         >
           <RotateCcw className="w-3.5 h-3.5" />
           <span>Reset Tab</span>
